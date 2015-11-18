@@ -1,0 +1,23 @@
+set number
+set backspace=2
+set wrap
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set ruler
+set autoindent
+set colorcolumn=80
+syntax enable
+set cursorline
+set foldcolumn=1
+set wildmenu
+set incsearch
+set ignorecase
+set laststatus=2
+set mouse=a
+set noerrorbells
+set visualbell 
+set scrolloff=3
+set wildmode=list:longest 
+
+execute pathogen#infect()
