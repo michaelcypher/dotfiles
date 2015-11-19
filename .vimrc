@@ -19,5 +19,3 @@ set noerrorbells
 set visualbell 
 set scrolloff=3
 set wildmode=list:longest 
-
-execute pathogen#infect()
