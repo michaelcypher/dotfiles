@@ -45,7 +45,7 @@ concat_ps1() {
     str+=$username$hostname$dir
 
     t=$(date +"%T")
-    t=$(make_length $time $SIZE)
+    t=$(make_length $t $SIZE)
     str+=$t
 
     branch=$(git branch 2> /dev/null | grep '*')
@@ -54,7 +54,6 @@ concat_ps1() {
       str+=$branch
     fi
 
-    #echo $username$hostname$dir$t$branch
     echo $str
 }
 
@@ -151,7 +150,7 @@ PS1='[                 ] $ '
 ## Aliases ##
 #############
 
-alias up='cd ..'
-alias back='cd -'
-alias rm='rm -r'
-alias cp='cp -r'
+#alias up='cd ..'
+#alias back='cd -'
+#alias rm='rm -r'
+#alias cp='cp -r'
