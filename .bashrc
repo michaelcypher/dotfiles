@@ -150,7 +150,24 @@ PS1='[                 ] $ '
 ## Aliases ##
 #############
 
-#alias up='cd ..'
-#alias back='cd -'
-#alias rm='rm -r'
-#alias cp='cp -r'
+alias up='cd ..'
+alias back='cd -'
+alias rm='rm -r'
+alias cp='cp -r'
+
+# Ubuntu / Linux Distro aliases
+# Todo: Only run these on specified OSs
+alias mypkgs='apt-cache pkgnames'
+alias wifilist='nmcli dev wifi list'
+
+connect_to_wifi() {
+    name=$1
+    password=$2
+
+    nmcli dev wifi con $1 password $2
+}
+
+alias wificon=connect_to_wifi
+alias wifioff='nmcli radio wifi off' 
+alias wifioff='nmcli radio wifi on' 
+
