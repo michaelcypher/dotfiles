@@ -94,7 +94,7 @@ animation() {
              substr=${str:$start:$SIZE}
 
              echo_to_box $POS $substr $COLOR
-             sleep 0.05
+             sleep $(bc <<< "scale=5; 1/$SIZE")
              i=$(($i + 1))
           done
       done
@@ -169,5 +169,6 @@ connect_to_wifi() {
 
 alias wificon=connect_to_wifi
 alias wifioff='nmcli radio wifi off' 
-alias wifioff='nmcli radio wifi on' 
+alias wifion='nmcli radio wifi on' 
+alias touchpad='synclient'
 

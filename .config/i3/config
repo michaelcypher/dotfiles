@@ -12,40 +12,63 @@
 # Needs to be unset for gaps to work
 for_window[class="^.*"] border pixel 3
 
-gaps inner 50
-gaps outer 25
+gaps inner 25
+gaps outer 0
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "resize gaps: (o) outer, (i) inner"
+
+mode "resize gaps: (o) outer, (i) inner" {
+        bindsym o      mode "resize outer gaps: +|-|0 (local), Shift + +|-|0 (global)"
+        bindsym i      mode "resize inner gaps: +|-|0 (local), Shift + +|-|0 (global)"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "resize inner gaps: +|-|0 (local), Shift + +|-|0 (global)" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "resize outer gaps: +|-|0 (local), Shift + +|-|0 (global)" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
 set $mod Mod4
 
-# Colors
-set $black       #212121
-set $darkblack   #000000
-set $red         #fb4934
-set $darkred     #cc241d
-set $green       #b8bb26
-set $darkgreen   #98971a
-set $yellow      #fabd2f
-set $darkyellow  #d79921
-set $blue        #83a598
-set $darkblue    #458588
-set $magenta     #d3869b
-set $darkmagenta #b16286
-set $cyan        #8ec07c
-set $darkcyan    #689d6a
-set $white       #ebdbb2
-set $darkwhite   #a89984
-set $background  #000000
-set $transparent #000000FF
-
-#                       BORDER      BACKGROUND  TEXT   INDICATOR
-client.focused          $green      $green      $black $green
-client.unfocused        $black      $black      $white $black
-client.focused_inactive $black      $black      $white $black
-client.urgent           $red        $red        $black $red
-client.background       $black
-
 # Start up firefox
-bindsym $mod+Shift+f exec firefox
+bindsym $mod+Shift+i mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h) github"
+
+mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h) github" {
+        
+        bindsym g exec firefox -new-window "www.google.com"
+        bindsym f exec firefox -new-window "www.facebook.com"
+        bindsym m exec firefox -new-window "www.gmail.com"
+        bindsym r exec firefox -new-window "www.reddit.com"
+        bindsym y exec firefox -new-window "www.youtube.com"
+        bindsym h exec firefox -new-window "www.github.com"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
 # Mac volume keybindings
 
@@ -189,14 +212,52 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+# Colors
+set $black       #212121
+set $darkblack   #000000
+set $red         #fb4934
+set $darkred     #cc241d
+set $green       #b8bb26
+set $darkgreen   #98971a
+set $yellow      #fabd2f
+set $darkyellow  #d79921
+set $blue        #83a598
+set $darkblue    #458588
+set $magenta     #d3869b
+set $darkmagenta #b16286
+set $cyan        #8ec07c
+set $darkcyan    #689d6a
+set $white       #ebdbb2
+set $darkwhite   #a89984
+set $background  #000000
+set $transparent #000000FF
+
+#                       BORDER      BACKGROUND  TEXT   INDICATOR
+client.focused          $green      $green      $black $green
+client.unfocused        $black      $black      $white $black
+client.focused_inactive $black      $black      $white $black
+client.urgent           $red        $red        $black $red
+client.background       $black
+
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        #status_command i3status
+        status_command i3blocks
         tray_output primary
         height 25
         position top
         font pango:DejaVu Sans Mono 12
 }
+
+exec_always feh --bg-fill ~/Documents/wallpapers/mountain.png
+
+exec_always compton -cCGfF -b -i 0.50 --vsync opengl &
+
+exec_always synclient PalmDetect=1
+exec_always synclient PalmMinWidth=8
+exec_always synclient PalmMinZ=100
+
+exec_always setxkbmap -layout us -variant mac
