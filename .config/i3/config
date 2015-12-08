@@ -13,7 +13,7 @@
 for_window[class="^.*"] border pixel 3
 
 gaps inner 25
-gaps outer 0
+gaps outer 100
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -54,10 +54,13 @@ mode "resize outer gaps: +|-|0 (local), Shift + +|-|0 (global)" {
 
 set $mod Mod4
 
-# Start up firefox
-bindsym $mod+Shift+i mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h) github"
+# Exec i3lock script
+bindsym $mod+Shift+l exec /bin/bash .lock.sh
 
-mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h) github" {
+# Start up firefox
+bindsym $mod+Shift+i mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h) github, (p) private"
+
+mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h) github, (p) private" {
         
         bindsym g exec firefox -new-window "www.google.com"
         bindsym f exec firefox -new-window "www.facebook.com"
@@ -65,6 +68,8 @@ mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h)
         bindsym r exec firefox -new-window "www.reddit.com"
         bindsym y exec firefox -new-window "www.youtube.com"
         bindsym h exec firefox -new-window "www.github.com"
+
+        bindsym p exec firefox -private-window
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -74,7 +79,7 @@ mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h)
 
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86AudioMute exec amixer -q -D pule set Master toggle
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -101,17 +106,17 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu_run -i -b -p 'Search' -nb '#fdf6e3' -nf '#586c75' -sf '#fdf6e3' -sb '#b58900' -fn '-sony-fixed-*-*-*-*-*-150-*-*-*-*-*-*'"
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -120,10 +125,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -247,17 +252,18 @@ bar {
         #status_command i3status
         status_command i3blocks
         tray_output primary
-        height 25
+        height 30
         position top
-        font pango:DejaVu Sans Mono 12
+        font pango:DejaVu Sans Mono 14
 }
 
 exec_always feh --bg-fill ~/Documents/wallpapers/mountain.png
 
-exec_always compton -cCGfF -b -i 0.50 --vsync opengl &
+exec_always compton -cCGfF -b -i 0.50 --vsync opengl
 
 exec_always synclient PalmDetect=1
 exec_always synclient PalmMinWidth=8
 exec_always synclient PalmMinZ=100
+exec_always synclient MaxTapTime=0
 
 exec_always setxkbmap -layout us -variant mac
