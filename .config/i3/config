@@ -10,7 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Needs to be unset for gaps to work
-for_window[class="^.*"] border pixel 3
+for_window[class="^.*"] border pixel 0
 
 gaps inner 25
 gaps outer 100
@@ -100,7 +100,8 @@ font pango:DejaVu Sans Mono 18
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -110,7 +111,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu_run -i -b -p 'Search' -nb '#fdf6e3' -nf '#586c75' -sf '#fdf6e3' -sb '#b58900' -fn '-sony-fixed-*-*-*-*-*-150-*-*-*-*-*-*'"
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu_run -i -b -p 'Search' -nb '#fdf6e3' -nf '#586c75' -sf '#fdf6e3' -sb '#b58900' -fn '-sony-fixed-*-*-*-*-*-150-*-*-*-*-*-*'"
 
 # change focus
 #bindsym $mod+j focus left
