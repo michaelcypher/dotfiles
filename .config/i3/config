@@ -79,7 +79,7 @@ mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h)
 
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q -D pule set Master toggle
+bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
