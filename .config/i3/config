@@ -258,7 +258,7 @@ bar {
         font pango:DejaVu Sans Mono 14
 }
 
-exec_always feh --bg-fill ~/Documents/wallpapers/mountain.png
+exec_always /bin/bash .wallpaper.sh
 
 exec_always compton -cCGfF -b -i 0.50 --vsync opengl
 
