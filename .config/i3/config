@@ -57,6 +57,11 @@ set $mod Mod4
 # Exec i3lock script
 bindsym $mod+Shift+l exec /bin/bash .lock.sh
 
+# Screen brightness controls
+# Need to add username ALL=NOPASSWD: /usr/bin/tee /sys/class/backlight/gmux_backlight/brightness to 'visudo'
+bindsym XF86MonBrightnessUp exec /bin/bash .backlight.sh up
+bindsym XF86MonBrightnessDown exec /bin/bash .backlight.sh down
+
 # Start up firefox
 bindsym $mod+Shift+i mode "firefox: (g) google, (f) facebook, (m) gmail, (r) reddit, (y) youtube, (h) github, (p) private"
 
