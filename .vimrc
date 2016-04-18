@@ -16,12 +16,15 @@ set ruler
 
 syntax enable
 
-let &colorcolumn=join(range(81,999),",")
-hi ColorColumn ctermfg=White ctermbg=Black cterm=bold guifg=white guibg=black
-set cursorline
-hi CursorLine ctermfg=White ctermbg=Red cterm=bold guifg=white guibg=red
+highlight OverLength ctermbg=Red ctermfg=White
+match OverLength /\%81v.\+/
+
 set cursorcolumn
-hi CursorColumn ctermfg=White ctermbg=Red cterm=bold guifg=white guibg=red
+hi CursorColumn ctermfg=White ctermbg=Black cterm=bold
+set cursorline
+hi CursorLine ctermfg=Black ctermbg=Yellow cterm=bold
+
+set cursorline
 
 set foldcolumn=1
 
@@ -42,13 +45,8 @@ set hlsearch
 
 set list lcs=trail:·
 
-
-" Vim
 let g:indentLine_color_term = 239
-"
-" "GVim
 let g:indentLine_color_gui = '#A4E57E'
-"
-" " none X terminal
 let g:indentLine_color_tty_light = 7 " (default: 4)
 let g:indentLine_color_dark = 1 " (default: 2)
+
