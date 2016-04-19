@@ -1,3 +1,6 @@
+set t_Co=256
+
+
 set backspace=2
 set wrap
 set shiftwidth=4
@@ -20,7 +23,7 @@ highlight OverLength ctermbg=Red ctermfg=White
 match OverLength /\%81v.\+/
 
 set cursorcolumn
-hi CursorColumn ctermfg=White ctermbg=Black cterm=bold
+hi CursorColumn ctermfg=Black ctermbg=Yellow cterm=bold
 set cursorline
 hi CursorLine ctermfg=Black ctermbg=Yellow cterm=bold
 
