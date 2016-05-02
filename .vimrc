@@ -1,5 +1,13 @@
+" Remove arrow key bindings!
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+
 set t_Co=256
 
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_preset = 'full'
 
 set backspace=2
 set wrap
@@ -31,6 +39,8 @@ set cursorline
 
 set foldcolumn=1
 
+hi Pmenu ctermbg=White ctermfg=Black
+
 set wildmenu
 set incsearch
 set ignorecase
@@ -44,6 +54,7 @@ set visualbell
 
 set scrolloff=3
 
+hi Search cterm=bold ctermfg=Black ctermbg=Cyan
 set hlsearch
 
 set list lcs=trail:·
