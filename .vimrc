@@ -65,3 +65,4 @@ let g:indentLine_color_tty_light = 7 " (default: 4)
 let g:indentLine_color_dark = 1 " (default: 2)
 
 autocmd VimEnter * TagbarToggle
+let g:tagbar_left = 1
