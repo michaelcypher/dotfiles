@@ -24,7 +24,9 @@ echo 'Installing Vim-Airline for a sexy tool bar!'
 git clone https://github.com/vim-airline/vim-airline
 echo 'Installing SnipMate for autocomplete!'
 git clone https://github.com/msanders/snipmate.vim
-echo 'Installing Tmuxline for intergrated vim and tmux tool bars!'
-git clone https://github.com/edkolev/tmuxline.vim
+#echo 'Installing Tmuxline for intergrated vim and tmux tool bars!'
+#git clone https://github.com/edkolev/tmuxline.vim
+echo 'Installing Tagbar!'
+git clone git://github.com/majutsushi/tagbar
 echo 'Installed Vim plugins!'
 

@@ -6,8 +6,8 @@ nnoremap <Up> <Nop>
 
 set t_Co=256
 
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_preset = 'full'
+" let g:tmuxline_powerline_separators = 0
+" let g:tmuxline_preset = 'full'
 
 set backspace=2
 set wrap
@@ -64,3 +64,4 @@ let g:indentLine_color_gui = '#A4E57E'
 let g:indentLine_color_tty_light = 7 " (default: 4)
 let g:indentLine_color_dark = 1 " (default: 2)
 
+autocmd VimEnter * TagbarToggle
