@@ -27,15 +27,17 @@ set ruler
 
 syntax enable
 
-highlight OverLength ctermbg=Red ctermfg=White
+hi Visual ctermfg=Black ctermbg=Cyan cterm=bold
+
+hi OverLength cterm=underline
 match OverLength /\%81v.\+/
 
-set cursorcolumn
-hi CursorColumn ctermfg=Black ctermbg=Yellow cterm=bold
-set cursorline
-hi CursorLine ctermfg=Black ctermbg=Yellow cterm=bold
+"set cursorcolumn
+"hi CursorColumn ctermfg=Black ctermbg=Yellow cterm=bold
+"set cursorline
+"hi CursorLine ctermfg=Black ctermbg=Yellow cterm=bold
 
-set cursorline
+"set cursorline
 
 set foldcolumn=1
 
@@ -54,7 +56,7 @@ set visualbell
 
 set scrolloff=3
 
-hi Search cterm=bold ctermfg=Black ctermbg=Cyan
+hi Search ctermfg=Black ctermbg=Cyan cterm=bold 
 set hlsearch
 
 set list lcs=trail:·
@@ -66,3 +68,13 @@ let g:indentLine_color_dark = 1 " (default: 2)
 
 autocmd VimEnter * TagbarToggle
 let g:tagbar_left = 1
+
+" Enable mouse for everything and update the screen quickly!
+" You can now drag splits like a God!
+set ttyfast
+set mouse=a
+set ttymouse=xterm2
+
+" Makes splits easier (since s is pretty useless anyway)
+nnoremap s <C-W>
+
