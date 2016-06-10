@@ -1,33 +1,47 @@
-
+echo 'Copying .vimrc, .tmux.conf and .bashrc to home directory.'
 cp .vimrc ~/.vimrc
 cp .tmux.conf ~/.tmux.conf
+cp .bashrc ~/.bashrc
+echo 'Done.\n'
 
-echo 'Installing ACK!'
+. ~/.bashrc
+
+echo 'Installing ACK.'
 curl http://beyondgrep.com/ack-2.14-single-file > ~/bin/ack && chmod 0755 !#:3
-echo 'Installed ACK!'
+echo 'Done.\n'
 
-echo 'Install Pathogen!'
+echo 'Installing AG.'
+brew install the_silver_searcher
+echo 'Done.\n'
+
+echo 'Installing thefuck'
+brew install thefuck
+echo 'Done.\n'
+
+echo 'Installing Pathogen.'
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-echo 'Installed Pathogen!'
+echo 'Done.\n'
 
-echo 'Installing Vim plugins!'
+echo 'Installing Vim plugins.\n'
 cd ~/.vim/bundle
-echo 'Installing Ack for super fast code search!'
-git clone https://github.com/mileszs/ack.vim
-echo 'Installing IndentLine for visible indentation!'
-git clone https://github.com/Yggdroot/indentLine
-echo 'Installing NerdCommenter for easy commenting!'
-git clone https://github.com/scrooloose/nerdcommenter
-echo 'Installing NerdTree for amazing file navigation!'
-git clone https://github.com/scrooloose/nerdtree
-echo 'Installing Vim-Airline for a sexy tool bar!'
-git clone https://github.com/vim-airline/vim-airline
-echo 'Installing SnipMate for autocomplete!'
-git clone https://github.com/msanders/snipmate.vim
-#echo 'Installing Tmuxline for intergrated vim and tmux tool bars!'
-#git clone https://github.com/edkolev/tmuxline.vim
-echo 'Installing Tagbar!'
-git clone git://github.com/majutsushi/tagbar
-echo 'Installed Vim plugins!'
 
+echo 'ACK'
+git clone https://github.com/mileszs/ack.vim
+
+echo 'IndentLine'
+git clone https://github.com/Yggdroot/indentLine
+
+echo 'NerdCommenter'
+git clone https://github.com/scrooloose/nerdcommenter
+
+echo 'NerdTree'
+git clone https://github.com/scrooloose/nerdtree
+
+echo 'Vim-Airline'
+git clone https://github.com/vim-airline/vim-airline
+
+echo 'Tagbar'
+git clone git://github.com/majutsushi/tagbar
+echo 'Done.\n'
+echo 'Exiting...'
