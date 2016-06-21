@@ -1,7 +1,10 @@
-echo 'Copying .vimrc and .tmux.conf to home directory.'
+echo 'Copying .vimrc, .tmux.conf and .bashrc to home directory.'
 cp .vimrc ~/.vimrc
 cp .tmux.conf ~/.tmux.conf
+cp .bashrc ~/.bashrc
 echo 'Done.\n'
+
+. ~/.bashrc
 
 echo 'Installing ACK.'
 curl http://beyondgrep.com/ack-2.14-single-file > ~/bin/ack && chmod 0755 !#:3

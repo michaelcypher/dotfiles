@@ -24,7 +24,9 @@ set ruler
 
 syntax enable
 
-highlight OverLength term=underline
+hi Visual ctermfg=Black ctermbg=Cyan cterm=bold
+
+hi OverLength cterm=underline
 match OverLength /\%81v.\+/
 
 set foldcolumn=1
@@ -44,7 +46,7 @@ set visualbell
 
 set scrolloff=3
 
-hi Search cterm=bold ctermfg=Black ctermbg=Cyan
+hi Search ctermfg=Black ctermbg=Cyan cterm=bold 
 set hlsearch
 
 set list lcs=trail:·
@@ -56,12 +58,6 @@ let g:indentLine_color_dark = 1
 
 autocmd VimEnter * TagbarToggle
 let g:tagbar_left = 1
-
-
-
-
-
-
 
 function! ConwaysGameOfLife()
     "Build initial board from file
@@ -150,4 +146,11 @@ function! ConwaysGameOfLife()
 endfunction
 
 
+" Enable mouse for everything and update the screen quickly!
+" You can now drag splits like a God!
+set ttyfast
+set mouse=a
+set ttymouse=xterm2
 
+" Makes splits easier (since s is pretty useless anyway)
+nnoremap s <C-W>
