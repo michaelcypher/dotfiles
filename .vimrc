@@ -6,6 +6,7 @@ nnoremap <Up> <Nop>
 
 set t_Co=256
 
+
 set backspace=2
 set wrap
 set shiftwidth=4
@@ -39,7 +40,7 @@ set laststatus=2
 
 set mouse=a
 set noerrorbells
-set visualbell 
+set visualbell
 
 set scrolloff=3
 
@@ -55,3 +56,98 @@ let g:indentLine_color_dark = 1
 
 autocmd VimEnter * TagbarToggle
 let g:tagbar_left = 1
+
+
+
+
+
+
+
+function! ConwaysGameOfLife()
+    "Build initial board from file
+    let height = winheight(0)
+    let width = winwidth(0) - (max([len(line('$')), &numberwidth-1]) + 1)
+    let board = []
+    for row in range(height)
+        let board_row = []
+        for column in range(width)
+            let char = matchstr(getline(row), '\%' . column . 'c.')
+            if char =~ '\S'
+                let board_row = add(board_row, char)
+            else
+                let board_row = add(board_row, ' ')
+            endif
+        endfor
+        let board = add(board, board_row)
+    endfor
+
+    let iterations = 50
+    while iterations > 0
+        "Print board
+        for row in range(height)
+            let line = join(board[row][1:], '')
+            let line = substitute(line, '\s\+$', '', '')
+            call setline(row, line)
+        endfor
+
+        "Update board
+        let new_board = []
+        for row in range(height)
+            let new_board_row = []
+            for column in range(width)
+                let counter = 0
+                let new_char = 'C'
+
+                if get(get(board, row - 1, []), column, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row - 1, []), column, new_char)
+                endif
+                if get(get(board, row + 1, []), column, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row + 1, []), column, new_char)
+                endif
+                if get(get(board, row - 1, []), column - 1, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row - 1, []), column - 1, new_char)
+                endif
+                if get(get(board, row + 1, []), column - 1, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row + 1, []), column - 1, new_char)
+                endif
+                if get(get(board, row - 1, []), column + 1, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row - 1, []), column + 1, new_char)
+                endif
+                if get(get(board, row + 1, []), column + 1, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row + 1, []), column + 1, new_char)
+                endif
+                if get(get(board, row, []), column - 1, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row, []), column - 1, new_char)
+                endif
+                if get(get(board, row, []), column + 1, ' ') =~ '\S'
+                    let counter = counter + 1
+                    let new_char = get(get(board, row, []), column + 1, new_char)
+                endif
+
+                if counter < 2 || counter > 3
+                    let new_board_row = add(new_board_row, ' ')
+                elseif counter == 3 && get(get(board, row, []), column, ' ') =~ '\s'
+                    let new_board_row = add(new_board_row, new_char)
+                elseif get(get(board, row, []), column, ' ') =~ '\S'
+                    let new_board_row = add(new_board_row, new_char)
+                endif
+            endfor
+            let new_board = add(new_board, new_board_row)
+        endfor
+
+        let board = new_board
+        let iterations = iterations - 1
+        redraw
+        sleep 100m
+    endwhile
+endfunction
+
+
+
