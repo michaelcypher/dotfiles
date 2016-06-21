@@ -59,6 +59,19 @@ let g:indentLine_color_dark = 1
 autocmd VimEnter * TagbarToggle
 let g:tagbar_left = 1
 
+" Enable mouse for everything and update the screen quickly!
+" You can now drag splits like a God!
+set ttyfast
+set mouse=a
+set ttymouse=xterm2
+
+" Makes splits easier (since s is pretty useless anyway)
+nnoremap s <C-W>
+
+
+
+
+
 function! ConwaysGameOfLife()
     "Build initial board from file
     let height = winheight(0)
@@ -67,7 +80,7 @@ function! ConwaysGameOfLife()
     for row in range(height)
         let board_row = []
         for column in range(width)
-            let char = matchstr(getline(row), '\%' . column . 'c.')
+            let char = matchstr(getline(row + line('w0')), '\%' . column . 'c.')
             if char =~ '\S'
                 let board_row = add(board_row, char)
             else
@@ -77,23 +90,25 @@ function! ConwaysGameOfLife()
         let board = add(board, board_row)
     endfor
 
-    let iterations = 50
-    while iterations > 0
+    let keep_running = 1
+    while keep_running
         "Print board
         for row in range(height)
             let line = join(board[row][1:], '')
             let line = substitute(line, '\s\+$', '', '')
-            call setline(row, line)
+            call setline(row + line('w0'), line)
         endfor
 
         "Update board
         let new_board = []
+        let keep_running = 0
         for row in range(height)
             let new_board_row = []
             for column in range(width)
                 let counter = 0
-                let new_char = 'C'
+                let new_char = '█'
 
+                "Probably could be done nicer with a for loop but meh, vimscript
                 if get(get(board, row - 1, []), column, ' ') =~ '\S'
                     let counter = counter + 1
                     let new_char = get(get(board, row - 1, []), column, new_char)
@@ -127,30 +142,28 @@ function! ConwaysGameOfLife()
                     let new_char = get(get(board, row, []), column + 1, new_char)
                 endif
 
-                if counter < 2 || counter > 3
-                    let new_board_row = add(new_board_row, ' ')
-                elseif counter == 3 && get(get(board, row, []), column, ' ') =~ '\s'
-                    let new_board_row = add(new_board_row, new_char)
-                elseif get(get(board, row, []), column, ' ') =~ '\S'
-                    let new_board_row = add(new_board_row, new_char)
+                let alive = (board[row][column] =~ '\S')
+                if alive
+                    if counter < 2 || counter > 3
+                        let new_board_row = add(new_board_row, ' ')
+                    else
+                        let new_board_row = add(new_board_row, new_char)
+                        let keep_running = 1
+                    endif
+                else
+                    if counter == 3
+                        let new_board_row = add(new_board_row, new_char)
+                        let keep_running = 1
+                    else
+                        let new_board_row = add(new_board_row, ' ')
+                    endif
                 endif
             endfor
             let new_board = add(new_board, new_board_row)
         endfor
 
         let board = new_board
-        let iterations = iterations - 1
         redraw
-        sleep 100m
+        sleep 50m
     endwhile
 endfunction
-
-
-" Enable mouse for everything and update the screen quickly!
-" You can now drag splits like a God!
-set ttyfast
-set mouse=a
-set ttymouse=xterm2
-
-" Makes splits easier (since s is pretty useless anyway)
-nnoremap s <C-W>
