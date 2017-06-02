@@ -1,0 +1,5 @@
+fzf
+neovim
+tmux
+universal-ctags
+ag
